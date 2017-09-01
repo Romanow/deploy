@@ -1,3 +1,11 @@
 language: java
 
 script: ./gradlew clean build
+
+deploy:
+  provider: heroku
+  api_key: 8bb26f2e-7699-45d7-8ba7-2387d4a40ec0
+  app: rsoi-iu7-hello-world-deploy
+
+notifications:
+  email: false
