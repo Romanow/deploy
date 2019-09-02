@@ -61,9 +61,9 @@ class RestApiControllerTest {
     void personsFindSuccess()
             throws Exception {
         final PersonInfo person = new PersonInfo(NAME1, AGE);
-        when(personService.getAllPersons()).thenReturn(newArrayList(person));
+        when(personService.findByName(eq(NAME1))).thenReturn(newArrayList(person));
 
-        mockMvc.perform(get("/api/v1")
+        mockMvc.perform(get("/api/v1?name=" + NAME1)
                 .accept(MediaType.APPLICATION_JSON_UTF8))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
