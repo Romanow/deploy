@@ -8,6 +8,7 @@ import lombok.experimental.Accessors;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 @Data
 @Accessors(chain = true)
@@ -15,11 +16,11 @@ import javax.validation.constraints.NotEmpty;
 @RequiredArgsConstructor
 public class CreatePersonRequest {
 
-    @NotEmpty(message = "{field.not.empty")
+    @NotEmpty(message = "{field.not.empty}")
     private String name;
 
-    @NotEmpty(message = "{field.not.null")
-    @Min(value = 0, message = "{field.min")
-    @Max(value = 100, message = "{field.max")
+    @NotNull(message = "{field.not.null}")
+    @Min(value = 0, message = "{field.min}")
+    @Max(value = 100, message = "{field.max}")
     private Integer age;
 }

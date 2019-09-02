@@ -7,6 +7,7 @@ import ru.romanow.deploy.model.CreatePersonRequest;
 import ru.romanow.deploy.model.PersonInfo;
 import ru.romanow.deploy.service.PersonService;
 
+import javax.validation.Valid;
 import java.net.URI;
 import java.util.List;
 
@@ -30,7 +31,7 @@ public class RestApiController {
     }
 
     @PostMapping(consumes = APPLICATION_JSON_UTF8_VALUE, produces = APPLICATION_JSON_UTF8_VALUE)
-    public ResponseEntity createPerson(@RequestBody CreatePersonRequest request) {
+    public ResponseEntity createPerson(@Valid @RequestBody CreatePersonRequest request) {
         final URI location = personService.createPerson(request);
         return ResponseEntity.created(location).build();
     }
