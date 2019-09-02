@@ -1,6 +1,8 @@
 package ru.romanow.deploy.web;
 
 import lombok.RequiredArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ru.romanow.deploy.model.CreatePersonRequest;
@@ -17,6 +19,7 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_UTF8_VALUE;
 @RequestMapping("/api/v1")
 @RequiredArgsConstructor
 public class RestApiController {
+    private static final Logger logger = LoggerFactory.getLogger(RestApiController.class);
     private final PersonService personService;
 
     @GetMapping(produces = APPLICATION_JSON_UTF8_VALUE)
