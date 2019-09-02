@@ -41,7 +41,6 @@ dependencies {
     implementation "com.google.code.gson:gson"
     implementation "com.google.guava:guava:${guavaVersion}"
     implementation "org.apache.commons:commons-lang3:${commonsLangVersion}"
-    implementation "com.fasterxml.jackson.dataformat:jackson-dataformat-xml"
 
     compileOnly "com.google.code.findbugs:jsr305:${findBugsVersion}"
     implementation "org.projectlombok:lombok:${lombokVersion}"

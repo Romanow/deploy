@@ -11,7 +11,6 @@ import java.net.URI;
 import java.util.List;
 
 import static org.springframework.http.MediaType.APPLICATION_JSON_UTF8_VALUE;
-import static org.springframework.http.MediaType.APPLICATION_XML_VALUE;
 
 @RestController
 @RequestMapping("/api/v1")
@@ -19,7 +18,7 @@ import static org.springframework.http.MediaType.APPLICATION_XML_VALUE;
 public class RestApiController {
     private final PersonService personService;
 
-    @GetMapping(produces = { APPLICATION_JSON_UTF8_VALUE, APPLICATION_XML_VALUE })
+    @GetMapping(produces = APPLICATION_JSON_UTF8_VALUE)
     public List<PersonInfo> persons(@RequestParam(required = false) String name) {
         List<PersonInfo> persons;
         if (name != null) {
@@ -30,8 +29,7 @@ public class RestApiController {
         return persons;
     }
 
-    @PostMapping(consumes = APPLICATION_JSON_UTF8_VALUE,
-            produces = { APPLICATION_JSON_UTF8_VALUE, APPLICATION_XML_VALUE })
+    @PostMapping(consumes = APPLICATION_JSON_UTF8_VALUE, produces = APPLICATION_JSON_UTF8_VALUE)
     public ResponseEntity createPerson(@RequestBody CreatePersonRequest request) {
         final URI location = personService.createPerson(request);
         return ResponseEntity.created(location).build();
