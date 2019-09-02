@@ -9,6 +9,6 @@ import lombok.experimental.Accessors;
 @Accessors(chain = true)
 @AllArgsConstructor
 @NoArgsConstructor
-public class SimpleResponse {
+public class MessageResponse {
     private String message;
 }

@@ -1,27 +1,39 @@
 package ru.romanow.deploy.web;
 
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-import ru.romanow.deploy.model.SimpleRequest;
-import ru.romanow.deploy.model.SimpleResponse;
+import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+import ru.romanow.deploy.model.CreatePersonRequest;
+import ru.romanow.deploy.model.PersonInfo;
+import ru.romanow.deploy.service.PersonService;
 
-import javax.validation.Valid;
+import java.net.URI;
+import java.util.List;
 
-import static java.lang.String.format;
-import static org.springframework.http.MediaType.*;
+import static org.springframework.http.MediaType.APPLICATION_JSON_UTF8_VALUE;
+import static org.springframework.http.MediaType.APPLICATION_XML_VALUE;
 
 @RestController
 @RequestMapping("/api/v1")
+@RequiredArgsConstructor
 public class RestApiController {
+    private final PersonService personService;
+
+    @GetMapping(produces = { APPLICATION_JSON_UTF8_VALUE, APPLICATION_XML_VALUE })
+    public List<PersonInfo> persons(@RequestParam(required = false) String name) {
+        List<PersonInfo> persons;
+        if (name != null) {
+            persons = personService.findByName(name);
+        } else {
+            persons = personService.getAllPersons();
+        }
+        return persons;
+    }
 
     @PostMapping(consumes = APPLICATION_JSON_UTF8_VALUE,
             produces = { APPLICATION_JSON_UTF8_VALUE, APPLICATION_XML_VALUE })
-    public SimpleResponse helloWorld(@Valid @RequestBody SimpleRequest request) {
-        String age = request.getAge() != null ? format("Your age is %d", request.getAge()) : "";
-        return new SimpleResponse(format("Hello, %s. %s", request.getName(), age));
+    public ResponseEntity createPerson(@RequestBody CreatePersonRequest request) {
+        final URI location = personService.createPerson(request);
+        return ResponseEntity.created(location).build();
     }
-
-    // TODO: get & post
 }

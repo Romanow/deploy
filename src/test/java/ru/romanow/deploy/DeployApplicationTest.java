@@ -13,10 +13,10 @@ import ru.romanow.deploy.web.RestApiController;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
-@ActiveProfiles("test")
+@ActiveProfiles("test-db")
 @ExtendWith(SpringExtension.class)
 @SpringBootTest
-class ApplicationTest {
+class DeployApplicationTest {
 
     @Autowired
     private RestApiController restController;
