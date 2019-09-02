@@ -22,4 +22,6 @@ public class RestApiController {
         String age = request.getAge() != null ? format("Your age is %d", request.getAge()) : "";
         return new SimpleResponse(format("Hello, %s. %s", request.getName(), age));
     }
+
+    // TODO: get & post
 }
